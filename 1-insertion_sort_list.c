@@ -8,7 +8,7 @@
 void insertion_sort_list(listint_t **list)
 {
 	listint_t *node = NULL, *el_que_lo_aguanta = NULL, *tmp = NULL;
-    *list = NULL;
+	*list = NULL;
 
 	for (node = *list; node;)
 	{
@@ -32,7 +32,7 @@ void insertion_sort_list(listint_t **list)
 			if (tmp->prev)
 			{
 				tmp->prev->next = el_que_lo_aguanta->prev = tmp->prev;
-					tmp->prev = el_que_lo_aguanta;
+				tmp->prev = el_que_lo_aguanta;
 			}
 			else
 			{
