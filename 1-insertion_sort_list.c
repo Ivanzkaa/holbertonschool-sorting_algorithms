@@ -7,41 +7,40 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *node = NULL, *el_que_lo_aguanta = NULL, *tmp = NULL;
-	*list = NULL;
+	listint_t *node = NULL, *el_que_lo_aguanta = NULL, *el_que_le_sigue = NULL;
 
-	for (node = *list; node;)
+	if (!list || !(*list))
+	return;
+
+	node = (*list);
+	while (node)
 	{
-		if (node->next && (node->n > node->next->n))
-		{
-			el_que_lo_aguanta = node->next;
-			for (tmp = el_que_lo_aguanta; tmp->prev; tmp = tmp->prev)
-				if (tmp->prev->n < tmp->n)
-					break;
+		el_que_lo_aguanta = node->prev;
+		el_que_le_sigue = node->next;
 
-			if (el_que_lo_aguanta->next && el_que_lo_aguanta->prev)
+		while (el_que_lo_aguanta)
+		{
+			if (node->n < el_que_lo_aguanta->n)
 			{
-				el_que_lo_aguanta->prev->next = el_que_lo_aguanta->next;
-				el_que_lo_aguanta->next->prev = el_que_lo_aguanta->prev;
+				if (*list == el_que_lo_aguanta)
+					*list = node;
+				if (el_que_lo_aguanta->prev)
+					(el_que_lo_aguanta->prev)->next = el_que_lo_aguanta->next;
+				if (node->next)
+					(node->next)->prev = node->prev;
+
+				el_que_lo_aguanta->next = node->next;
+				node->next = el_que_lo_aguanta;
+				node->prev = el_que_lo_aguanta->prev;
+				el_que_lo_aguanta->prev = node;
+
+				print_list(*list);
+				el_que_lo_aguanta = node->prev;
 			}
 			else
-			{
-				el_que_lo_aguanta->prev->next = NULL;
-			}
-			el_que_lo_aguanta->next = tmp;
-			if (tmp->prev)
-			{
-				tmp->prev->next = el_que_lo_aguanta->prev = tmp->prev;
-				tmp->prev = el_que_lo_aguanta;
-			}
-			else
-			{
-				tmp->prev = el_que_lo_aguanta->prev = NULL;
-				*list = el_que_lo_aguanta;
-			}
-			print_list(*list), node = *list;
-			continue;
+				break;
 		}
-		node = node->next;
+		node = el_que_le_sigue;
 	}
 }
+
