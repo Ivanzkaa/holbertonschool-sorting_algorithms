@@ -10,29 +10,28 @@ void selection_sort(int *array, size_t size)
 {
 	size_t i, b, idx;
 	int tmp;
-	int sort_select;
 
-	if (size <= 1)
-		return;
+	if (!array)
+	return;
+	if (size < 2)
+	return;
 
-	for (i = 0; i < size - i; i++)
+	for (i = 0; i < size - 1; i++)
 	{
-		idx = i;
+		idx = 1;
 		for (b = i + 1; b < size; b++)
 		{
 			if (array[b] < array[idx])
 			{
 				idx = b;
-				sort_select = 1;
 			}
 		}
-		if (sort_select == 1)
+		if (idx != i)
 		{
-			tmp = array[idx];
-			array[idx] = array[i];
-			array[i] = tmp;
+			tmp = array[i];
+			array[i] = array[idx];
+			array[idx] = tmp;
 			print_array(array, size);
-			sort_select = 0;
 		}
 	}
 }
