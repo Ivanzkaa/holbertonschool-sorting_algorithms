@@ -8,15 +8,15 @@
 
 void bubble_sort(int *array, size_t size)
 {
-	size_t i = 0, b = 0;
-	int temp = 0;
+	size_t i, b;
+	int temp;
 
 	if (!array || size < 2)
 		return;
 
-	for (i = 0; i < size; i++)
+	for (i = 0; i < size - 1; i++)
 
-		for (b = 0; b < size; b++)
+		for (b = 0; b < size - 1; b++)
 
 			if (array[b] > array[b + 1])
 			{
